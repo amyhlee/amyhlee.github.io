@@ -38,6 +38,21 @@
         z-index: 0;
       }
 
+      .spotlight {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.8;
+        background: radial-gradient(
+          circle 800px at var(--x, 50%) var(--y, 50%),
+          rgba(180, 170, 200, 0.4),
+          rgba(155, 143, 168, 0.2) 40%,
+          transparent 70%
+        );
+        transition: opacity 0.3s ease;
+      }
+
       nav {
         position: fixed;
         top: 0;
@@ -455,6 +470,7 @@
   </head>
   <body>
     <div class="gradient-bg"></div>
+    <div class="spotlight"></div>
 
     <nav>
       <div class="logo">Amy S. Lee</div>
@@ -721,6 +737,15 @@
     </footer>
 
     <script>
+      const spotlight = document.querySelector(".spotlight");
+
+      document.addEventListener("mousemove", (e) => {
+        const x = (e.clientX / window.innerWidth) * 100;
+        const y = (e.clientY / window.innerHeight) * 100;
+        spotlight.style.setProperty("--x", `${x}%`);
+        spotlight.style.setProperty("--y", `${y}%`);
+      });
+
       function toggleMenu() {
         const menu = document.getElementById("navMenu");
         menu.classList.toggle("active");
