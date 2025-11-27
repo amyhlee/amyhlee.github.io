@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amy S. Lee - Designer & Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: #4a5543;
+        color: #d4c5e0;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .gradient-bg {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          #4a5543 0%,
+          #5a6355 30%,
+          #7a6f7a 60%,
+          #9b8fa8 100%
+        );
+        z-index: 0;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 2rem 3rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .logo {
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: #d4c5e0;
+      }
+
+      .nav-right {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        color: #d4c5e0;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: opacity 0.3s ease;
+      }
+
+      .nav-link:hover {
+        opacity: 0.7;
+      }
+
+      .contact-btn {
+        padding: 0.7rem 1.8rem;
+        border: 1.5px solid #d4c5e0;
+        border-radius: 50px;
+        color: #d4c5e0;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .contact-btn:hover {
+        background: #d4c5e0;
+        color: #4a5543;
+      }
+
+      .nav-toggle {
+        display: none;
+        font-size: 1rem;
+        color: #d4c5e0;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        max-width: 500px;
+        height: 100vh;
+        background: rgba(74, 85, 67, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 6rem 3rem;
+        transition: right 0.4s ease;
+        z-index: 999;
+      }
+
+      .nav-menu.active {
+        right: 0;
+      }
+
+      .nav-close {
+        position: absolute;
+        top: 2rem;
+        right: 3rem;
+        font-size: 2rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: #d4c5e0;
+        font-weight: 300;
+      }
+
+      .mobile-nav-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .mobile-nav-links a {
+        color: #d4c5e0;
+        text-decoration: none;
+        font-size: 2rem;
+        font-weight: 300;
+        transition: opacity 0.3s ease;
+      }
+
+      .mobile-nav-links a:hover {
+        opacity: 0.6;
+      }
+
+      section {
+        position: relative;
+        z-index: 1;
+        padding: 4rem 3rem;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 8rem 3rem;
+      }
+
+      .hero-intro {
+        font-size: clamp(1.5rem, 3vw, 2.5rem);
+        font-weight: 300;
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeIn 1s ease 0.2s forwards;
+      }
+
+      .hero-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(4rem, 15vw, 12rem);
+        font-weight: 300;
+        line-height: 0.95;
+        margin-bottom: 3rem;
+        letter-spacing: -0.02em;
+        color: #d4c5e0;
+        opacity: 0;
+        animation: fadeIn 1s ease 0.4s forwards;
+      }
+
+      .hero-subtitle {
+        font-size: clamp(1.2rem, 2.5vw, 2rem);
+        font-weight: 300;
+        opacity: 0.9;
+        max-width: 800px;
+        opacity: 0;
+        animation: fadeIn 1s ease 0.6s forwards;
+      }
+
+      .content-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 6rem 3rem;
+        border-top: 1px solid rgba(212, 197, 224, 0.2);
+      }
+
+      .section-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-weight: 300;
+        margin-bottom: 3rem;
+        letter-spacing: -0.01em;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-bottom: 4rem;
+      }
+
+      .label {
+        font-size: 0.9rem;
+        opacity: 0.7;
+        margin-bottom: 1rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .large-text {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.5rem, 3vw, 2.5rem);
+        font-weight: 300;
+        line-height: 1.4;
+        margin-bottom: 2rem;
+      }
+
+      .body-text {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        opacity: 0.9;
+        margin-bottom: 1.5rem;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 3rem;
+        margin: 4rem 0;
+      }
+
+      .stat {
+        border-top: 1px solid rgba(212, 197, 224, 0.3);
+        padding-top: 1.5rem;
+      }
+
+      .stat-number {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 300;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+        opacity: 0.8;
+      }
+
+      .project {
+        margin-bottom: 5rem;
+        padding-bottom: 5rem;
+        border-bottom: 1px solid rgba(212, 197, 224, 0.2);
+      }
+
+      .project:last-child {
+        border-bottom: none;
+      }
+
+      .project-number {
+        font-size: 0.9rem;
+        opacity: 0.6;
+        margin-bottom: 1rem;
+      }
+
+      .project-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+        gap: 2rem;
+      }
+
+      .project-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 300;
+        flex: 1;
+      }
+
+      .project-link {
+        color: #d4c5e0;
+        text-decoration: none;
+        font-size: 0.95rem;
+        padding: 0.8rem 1.8rem;
+        border: 1.5px solid rgba(212, 197, 224, 0.4);
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        display: inline-block;
+        margin-top: 0.5rem;
+        white-space: nowrap;
+      }
+
+      .project-link:hover {
+        background: #d4c5e0;
+        color: #4a5543;
+      }
+
+      .project-description {
+        font-size: 1.2rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+      }
+
+      .project-features {
+        list-style: none;
+        margin-bottom: 2rem;
+      }
+
+      .project-features li {
+        padding: 0.8rem 0;
+        font-size: 1rem;
+        opacity: 0.85;
+        border-bottom: 1px solid rgba(212, 197, 224, 0.15);
+      }
+
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .tech-badge {
+        font-size: 0.9rem;
+        padding: 0.5rem 1.2rem;
+        border: 1px solid rgba(212, 197, 224, 0.3);
+        border-radius: 50px;
+        opacity: 0.8;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+      }
+
+      .skill-category h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.8rem;
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(212, 197, 224, 0.3);
+      }
+
+      .skill-list {
+        list-style: none;
+      }
+
+      .skill-list li {
+        padding: 0.6rem 0;
+        font-size: 1rem;
+        opacity: 0.85;
+      }
+
+      footer {
+        padding: 3rem;
+        text-align: center;
+        border-top: 1px solid rgba(212, 197, 224, 0.2);
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .footer-text {
+        font-size: 0.95rem;
+        opacity: 0.7;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .footer-links a {
+        color: #d4c5e0;
+        text-decoration: none;
+        font-size: 0.95rem;
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        opacity: 1;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          padding: 1.5rem 2rem;
+        }
+
+        .nav-right .nav-link,
+        .nav-right .contact-btn {
+          display: none;
+        }
+
+        .nav-toggle {
+          display: block;
+        }
+
+        section {
+          padding: 3rem 2rem;
+        }
+
+        .two-col {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .project-header {
+          flex-direction: column;
+        }
+
+        .footer-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .nav-menu {
+          padding: 5rem 2rem;
+        }
+
+        .nav-close {
+          right: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="gradient-bg"></div>
+
+    <nav>
+      <div class="logo">Amy S. Lee</div>
+      <div class="nav-right">
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="contact-btn">Contact Me</a>
+      </div>
+      <button class="nav-toggle" onclick="toggleMenu()">Menu</button>
+    </nav>
+
+    <div class="nav-menu" id="navMenu">
+      <button class="nav-close" onclick="toggleMenu()">×</button>
+      <ul class="mobile-nav-links">
+        <li><a href="#about" onclick="toggleMenu()">About</a></li>
+        <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+        <li><a href="#skills" onclick="toggleMenu()">Skills</a></li>
+        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+      </ul>
+    </div>
+
+    <section class="hero">
+      <p class="hero-intro">I'm a</p>
+      <h1 class="hero-title">Designer &<br />Engineer</h1>
+      <p class="hero-subtitle">
+        specializing in intuitive user experiences integrated with AI tooling
+      </p>
+    </section>
+
+    <section id="about" class="content-section">
+      <h2 class="section-title">My Mission</h2>
+
+      <div class="two-col">
+        <div>
+          <p class="large-text">
+            Building beautiful, functional interfaces that combine technical
+            excellence with thoughtful design.
+          </p>
+        </div>
+        <div>
+          <p class="body-text">
+            Five years developing at Refinery29, Axios, and GetWell—reaching
+            50M+ users annually. I build interfaces where clarity and beauty
+            converge, creating experiences that feel effortless.
+          </p>
+          <p class="body-text">
+            Based in New York, I specialize in React, TypeScript, and AI
+            integration, with a proven track record of improving user engagement
+            by 25% and search rankings by 40%.
+          </p>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">50M+</div>
+          <div class="stat-label">User Interactions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">40%</div>
+          <div class="stat-label">SEO Improvement</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="label">Specialties</div>
+        <div class="two-col">
+          <div>
+            <p class="body-text">Frontend Development</p>
+            <p class="body-text">AI Integration</p>
+            <p class="body-text">User Experience</p>
+            <p class="body-text">System Architecture</p>
+          </div>
+          <div>
+            <p class="body-text">Performance Optimization</p>
+            <p class="body-text">Accessibility</p>
+            <p class="body-text">Design Systems</p>
+            <p class="body-text">Full-Stack Development</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="content-section">
+      <h2 class="section-title">Selected Work</h2>
+
+      <div class="project">
+        <div class="project-number">01</div>
+        <div class="project-header">
+          <h3 class="project-title">Write-On</h3>
+          <a
+            href="https://github.com/amyhlee/write-on"
+            class="project-link"
+            target="_blank"
+            >View Project</a
+          >
+        </div>
+        <p class="project-description">
+          A collaborative text editor featuring real-time canvas rendering and
+          an integrated AI writing assistant powered by OpenRouter.
+        </p>
+        <ul class="project-features">
+          <li>Real-time canvas rendering with WebSocket proxy architecture</li>
+          <li>AI writing assistant with OpenRouter API integration</li>
+          <li>Voice-to-text input and rich text formatting capabilities</li>
+          <li>Multi-server architecture (React, Node.js, Python)</li>
+          <li>Theme customization and export functionality</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">WebSocket</span>
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Node.js</span>
+          <span class="tech-badge">OpenRouter AI</span>
+        </div>
+      </div>
+
+      <div class="project">
+        <div class="project-number">02</div>
+        <div class="project-header">
+          <h3 class="project-title">Document Management</h3>
+          <a
+            href="https://github.com/amyhlee/document-management-system"
+            class="project-link"
+            target="_blank"
+            >View Project</a
+          >
+        </div>
+        <p class="project-description">
+          Modern document management platform combining traditional file
+          operations with AI-powered features for intelligent search and
+          automated analysis.
+        </p>
+        <ul class="project-features">
+          <li>AI-powered semantic search beyond keyword matching</li>
+          <li>
+            Automated content extraction, summarization, and smart tagging
+          </li>
+          <li>Natural language chat interface for document queries</li>
+          <li>Visual analytics and relationship mapping</li>
+          <li>Complete CRUD operations with intuitive tree-view interface</li>
+        </ul>
+        <div class="tech-stack">
+          <span class="tech-badge">Next.js 15</span>
+          <span class="tech-badge">React 19</span>
+          <span class="tech-badge">Tailwind CSS</span>
+          <span class="tech-badge">OpenRouter API</span>
+          <span class="tech-badge">Chart.js</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="content-section">
+      <h2 class="section-title">Technical Expertise</h2>
+
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3>Frontend</h3>
+          <ul class="skill-list">
+            <li>JavaScript / TypeScript</li>
+            <li>React / Next.js</li>
+            <li>Jotai State Management</li>
+            <li>Tailwind CSS</li>
+            <li>Responsive Design</li>
+            <li>Performance Optimization</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <h3>Backend</h3>
+          <ul class="skill-list">
+            <li>Node.js / Express</li>
+            <li>Next.js API Routes</li>
+            <li>SQL / PostgreSQL</li>
+            <li>RESTful APIs</li>
+            <li>WebSocket</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <h3>Cloud & DevOps</h3>
+          <ul class="skill-list">
+            <li>AWS</li>
+            <li>Kubernetes</li>
+            <li>Pantheon</li>
+            <li>Fastly CDN</li>
+            <li>Git / GitHub</li>
+            <li>CircleCI / GitHub Actions</li>
+          </ul>
+        </div>
+
+        <div class="skill-category">
+          <h3>AI & Tools</h3>
+          <ul class="skill-list">
+            <li>OpenRouter API</li>
+            <li>Claude / Claude Code</li>
+            <li>Cursor IDE</li>
+            <li>AI Integration</li>
+            <li>NLP Applications</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="content-section">
+      <h2 class="section-title">Get in Touch</h2>
+
+      <div class="two-col">
+        <div>
+          <p class="large-text">
+            Open to new opportunities and collaborations.
+          </p>
+        </div>
+        <div>
+          <p class="body-text">
+            I'm always interested in hearing about new projects, creative ideas,
+            or opportunities to be part of your vision.
+          </p>
+          <div style="margin-top: 2rem">
+            <div class="label">Email</div>
+            <a
+              href="mailto:lee.asl@gmail.com"
+              style="color: #d4c5e0; text-decoration: none; font-size: 1.3rem"
+              >lee.asl@gmail.com</a
+            >
+          </div>
+          <div style="margin-top: 2rem">
+            <div class="label">Location</div>
+            <p style="font-size: 1.1rem">New York, NY</p>
+          </div>
+          <div style="margin-top: 2rem">
+            <div class="label">Connect</div>
+            <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem">
+              <a
+                href="https://github.com/amyhlee"
+                target="_blank"
+                style="color: #d4c5e0; text-decoration: none"
+                >GitHub</a
+              >
+              <a
+                href="https://linkedin.com/in/leeeamy"
+                target="_blank"
+                style="color: #d4c5e0; text-decoration: none"
+                >LinkedIn</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-text">&copy; 2024 Amy S. Lee</div>
+        <div class="footer-links">
+          <a href="https://github.com/amyhlee" target="_blank">GitHub</a>
+          <a href="https://linkedin.com/in/leeeamy" target="_blank">LinkedIn</a>
+          <a href="mailto:lee.asl@gmail.com">Email</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("navMenu");
+        menu.classList.toggle("active");
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", (e) => {
+          e.preventDefault();
+          const target = document.querySelector(anchor.getAttribute("href"));
+          if (target) {
+            const navHeight = document.querySelector("nav").offsetHeight;
+            const targetPosition = target.offsetTop - navHeight;
+
+            window.scrollTo({
+              top: targetPosition,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
